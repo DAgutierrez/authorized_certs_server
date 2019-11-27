@@ -15,6 +15,8 @@ var options = {
     key: fs.readFileSync('certs/server-key.pem'), 
     cert: fs.readFileSync('certs/server-crt.pem'), 
     ca: fs.readFileSync('certs/ca-crt.pem'), 
+    requestCert: true, 
+    rejectUnauthorized: true
 }; 
 
 https.createServer(options, app).listen(4433, () => {
