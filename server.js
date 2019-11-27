@@ -1,17 +1,28 @@
 const bodyParser = require('body-parser');
 const express = require('express');
-var https = require('https');
+const https = require('https');
 const fs = require('fs');
+const required = require('express-required-fields')
 
 const app = express();
 
 app.use(bodyParser.json({ strict: false, limit: '50mb'}));
 
 app.get('/', (req, res) => {
-    res.send('hello world');
+    res.send('Authorized certs');
 });
 
-var options = { 
+const createRequiredFields = ['id', 'rut', 'firstName','lastName','secondLastName','pep','gender', 'dateOfBirth', 'nationality', 'phone', 'residenceCountry', 'address', 'city', 'commune', 'postalCode', 'maritalStatus', 'occupation', 'degree' ]
+app.post('/api/client', required(createRequiredFields), (req, res) => {
+    let response = req.body;
+    response.body.onboardStatus = 'pending';
+    response.body.createdAt = new Date();;
+    response.body.updatedAt = new Date();
+
+    res.json(response);
+});
+
+var options = {
     key: fs.readFileSync('certs/server-key.pem'), 
     cert: fs.readFileSync('certs/server-crt.pem'), 
     ca: fs.readFileSync('certs/ca-crt.pem'), 

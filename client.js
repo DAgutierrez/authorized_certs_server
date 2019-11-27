@@ -6,6 +6,8 @@ var options = {
     port: 4433, 
     path: '/', 
     method: 'GET', 
+    key: fs.readFileSync('certs/client1-key.pem'), 
+    cert: fs.readFileSync('certs/client1-crt.pem'), 
     ca: fs.readFileSync('certs/ca-crt.pem') 
 }; 
 
