@@ -15,9 +15,9 @@ app.get('/', (req, res) => {
 const createRequiredFields = ['id', 'rut', 'firstName','lastName','secondLastName','pep','gender', 'dateOfBirth', 'nationality', 'phone', 'residenceCountry', 'address', 'city', 'commune', 'postalCode', 'maritalStatus', 'occupation', 'degree' ]
 app.post('/api/client', required(createRequiredFields), (req, res) => {
     let response = req.body;
-    response.body.onboardStatus = 'pending';
-    response.body.createdAt = new Date();;
-    response.body.updatedAt = new Date();
+    response.onboardStatus = 'pending';
+    response.createdAt = new Date();;
+    response.updatedAt = new Date();
 
     res.json(response);
 });
